@@ -22,8 +22,8 @@ class Board extends React.Component {
 
     render() {
         this.grid = [];
-        for(let row = 0; row < 3; row++) {
-            this.grid.push([])
+        for (let row = 0; row < 3; row++) {
+            this.grid.push([]);
             for (let col = 0; col < 3; col++) {
                 this.grid[row].push(row * 3 + col);
             }
@@ -32,9 +32,7 @@ class Board extends React.Component {
             <div>
                 {this.grid.map(row => (
                     <div className="board-row">
-                        {row.map(cell => (
-                            this.renderSquare(cell)
-                        ))}
+                        {row.map(cell => this.renderSquare(cell))}
                     </div>
                 ))}
             </div>
@@ -94,7 +92,10 @@ class Game extends React.Component {
         if (winner) {
             status = `Winner: ${winner}`;
         } else {
-            status = `Next player: ${this.state.xIsNext ? "X" : "O"}`;
+            status =
+                this.state.stepNumber === 9
+                    ? "Draw"
+                    : `Next player: ${this.state.xIsNext ? "X" : "O"}`;
         }
         return (
             <div className="game">
